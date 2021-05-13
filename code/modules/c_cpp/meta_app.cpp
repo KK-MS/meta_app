@@ -4,16 +4,18 @@
 #include <map> // For map
 
 // application include
-#include "metainfo.h"
+#include "car_dash_meta.h"
 
 using namespace std;
 
 // Main application
 int main()
 {
-  Metainfo meta("config.txt");
+  CarDashMeta carDM("config.txt");
   cout << "Print full map" << endl;
-  meta.printMap();
-  cout << "Access key element 'App.Version' = " << meta.getValue("App.Version");
+  carDM.printMeta();
+  cout << "App Name: " << carDM.getName() << endl;
+  cout << "Sign 0 Name: " << carDM.getSignName(0) << endl;
+  cout << "Sign 0, Status 1 Name: " << carDM.getStatusName(0,1) << endl;
   return 0;
 }

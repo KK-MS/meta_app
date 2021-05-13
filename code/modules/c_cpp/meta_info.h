@@ -12,7 +12,7 @@ inline std::string trim(std::string &str)
 }
 
 // Metainfo class
-class Metainfo
+class MetaInfo
 {
   // metafile
   string sFilename;
@@ -41,16 +41,24 @@ class Metainfo
       _v = sLine.substr(_p + 1);
     }
 
-    // remove whitespaces 
+    // remove whitespaces
     _k = trim(_k);
     _v = trim(_v);
     lookup.insert(std::pair<string, string>(_k, _v));
   }
 
-
 public:
+  // Default constructure
+  MetaInfo()
+  {
+    sFilename = "";
+    sData = "";
+    sMsg = "init";
+    lookup = {};
+  }
+
   // Constructor with metafile
-  Metainfo(string sFilename)
+  MetaInfo(string sFilename)
   {
     ifstream hFile(sFilename);
     if (!hFile.is_open())
@@ -74,6 +82,18 @@ public:
     }
     hFile.close();
   }
+
+  // Copy constructor
+  MetaInfo(const MetaInfo &metaInfo)
+  {
+    sFilename = metaInfo.sFilename;
+    sData = metaInfo.sData;
+    sMsg = metaInfo.sMsg;
+    lookup = metaInfo.lookup;
+  }
+
+  // Methods -----------------------------------
+
   // return the key mapped value
   string getValue(string key)
   {
