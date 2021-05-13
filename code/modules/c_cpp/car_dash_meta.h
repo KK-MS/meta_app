@@ -43,6 +43,14 @@ class CarDashMeta
 
 public:
     // constructor
+
+    // default
+    CarDashMeta()
+    {
+        meta = MetaInfo();
+    }
+
+    // With filename
     CarDashMeta(string sFilename)
     {
         MetaInfo _m = MetaInfo(sFilename);
