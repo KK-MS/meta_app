@@ -1,0 +1,27 @@
+; Dashboard application meta data
+; Acronyms
+; RoI => Region of interest
+; Sts => Status
+App.Name = Dashboard application
+App.Version = 1.3.0
+App.In.Video = c:\test.mp4
+App.Out.File = c:\report.txt
+Sign.0.Name = Left indicator
+Sign.0.RoI.X = 10
+Sign.0.RoI.Y = 10
+Sign.0.RoI.H = 10
+Sign.0.RoI.W = 10
+Sign.0.Sts.0.Name = Left Indicator OFF
+Sign.0.Sts.0.R.Min = 10  
+Sign.0.Sts.0.R.Max = 100  
+Sign.0.Sts.0.B.Min = 20  
+Sign.0.Sts.0.B.Max = 210  
+Sign.0.Sts.0.G.Min = 40  
+Sign.0.Sts.0.G.Max = 140  
+Sign.0.Sts.1.Name = Left Indicator ON
+Sign.0.Sts.1.R.Min = 110  
+Sign.0.Sts.1.R.Max = 40  
+Sign.0.Sts.1.B.Min = 220  
+Sign.0.Sts.1.B.Max = 40  
+Sign.0.Sts.1.G.Min = 240  
+Sign.0.Sts.1.G.Max = 40  
