@@ -32,6 +32,8 @@ public:
     string msg() { return sMsg; }
     string name() { return carMeta.getName(); }
     string version() { return carMeta.getVersion(); }
+    string signName(int iSign) { return carMeta.getSignName(iSign); }
+    void printMeta() {return carMeta.printMeta();}
 
     // Algorithms
 
@@ -87,6 +89,8 @@ main()
     // print the banner
     cout << "App: " << carDash.name() << endl;
     cout << "Ver: " << carDash.version() << endl;
+    cout << "S Name: " << carDash.signName(1) << endl;
+    carDash.printMeta();
 
     // link to server
     if (!carDash.link())
