@@ -7,11 +7,40 @@
 
 using namespace std;
 
+string gCarBanner = "\
+  #####                   ######                       \n\
+ #     #   ##   #####     #     #   ##    ####  #    # \n\
+ #        #  #  #    #    #     #  #  #  #      #    # \n\
+ #       #    # #    #    #     # #    #  ####  ###### \n\
+ #       ###### #####     #     # ######      # #    # \n\
+ #     # #    # #   #     #     # #    # #    # #    # \n\
+  #####  #    # #    #    ######  #    #  ####  #    # \n\
+";
+
 // Metainfo class
 class CarDash
 {
     string sMsg;
     CarDashMeta carMeta;
+    enum logLevels
+    {
+        ERR,
+        WARN,
+        INFO,
+        DBG
+    };
+    logLevels ll;
+
+    // Private methods
+    int print(logLevels level, string str)
+    {
+        if (level <= ll)
+        {
+            cout << str << endl;
+            return 1;
+        }
+        return 0;
+    }
 
 public:
     // default constructor
@@ -19,6 +48,7 @@ public:
     {
         sMsg = "";
         carMeta = CarDashMeta();
+        ll = INFO;
     }
 
     // constructor with filename
@@ -33,16 +63,26 @@ public:
     string name() { return carMeta.getName(); }
     string version() { return carMeta.getVersion(); }
     string signName(int iSign) { return carMeta.getSignName(iSign); }
-    void printMeta() {return carMeta.printMeta();}
+    void printMeta() { return carMeta.printMeta(); }
+
+    // Setters
+    void setLogDgb() { ll = DBG; }
+    void setLogInfo() { ll = INFO; }
+    void setLogWarn() { ll = WARN; }
+    void setLogErr() { ll = ERR; }
 
     // Algorithms
 
     // Methods
+    void banner()
+    {
+        print(INFO, gCarBanner);
+    }
 
     // configure
     int config()
     {
-        cout << "CFG" << endl;
+        print(DBG, "CFG");
         carMeta = CarDashMeta("config.txt");
         return 1;
     }
@@ -50,28 +90,28 @@ public:
     // link to server
     int link()
     {
-        cout << "LINK" << endl;
+        print(DBG, "LINK");
         return 1;
     }
 
     // runtime processing
     int run()
     {
-        cout << "RUN" << endl;
+        print(DBG, "RUN");
         return 1;
     }
 
     // stop the application
     int stop()
     {
-        cout << "STOP" << endl;
+        print(DBG, "STOP");
         return 1;
     }
 
     // end the application and free the resources
     int end()
     {
-        cout << "END" << endl;
+        print(DBG, "END");
         return 1;
     }
 };
@@ -79,6 +119,9 @@ public:
 main()
 {
     CarDash carDash;
+
+    // display banner
+    carDash.banner();
 
     if (!carDash.config())
     {
@@ -90,7 +133,7 @@ main()
     cout << "App: " << carDash.name() << endl;
     cout << "Ver: " << carDash.version() << endl;
     cout << "S Name: " << carDash.signName(1) << endl;
-    carDash.printMeta();
+    //carDash.printMeta();
 
     // link to server
     if (!carDash.link())
