@@ -34,12 +34,14 @@ class CarDash
     // Private methods
     int print(logLevels level, string str)
     {
+        int status = 0;
+
         if (level <= ll)
         {
             cout << str << endl;
-            return 1;
+            status = 1;
         }
-        return 0;
+        return status;
     }
 
 public:
@@ -87,6 +89,13 @@ public:
         return 1;
     }
 
+    // end the application and free the resources
+    int end()
+    {
+        print(DBG, "END");
+        return 1;
+    }
+
     // link to server
     int link()
     {
@@ -108,12 +117,6 @@ public:
         return 1;
     }
 
-    // end the application and free the resources
-    int end()
-    {
-        print(DBG, "END");
-        return 1;
-    }
 };
 
 main()
@@ -133,7 +136,12 @@ main()
     cout << "App: " << carDash.name() << endl;
     cout << "Ver: " << carDash.version() << endl;
     cout << "S Name: " << carDash.signName(1) << endl;
-    //carDash.printMeta();
+
+    // enable info level print
+    carDash.setLogInfo();
+
+    // if debug level is enabled, print meta information
+    carDash.printMeta();
 
     // link to server
     if (!carDash.link())
