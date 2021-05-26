@@ -72,9 +72,10 @@ public:
     string sLine;
 
     // store the data and parallel map data.
-    while (!hFile.eof())
+    // Linux sometime does not add eof, thus not using eof()
+    //while (!hFile.eof())
+    while(getline(hFile, sLine))
     {
-      getline(hFile, sLine);
       sData += sLine + "\n";
 
       iLineNum++;
